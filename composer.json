@@ -20,7 +20,7 @@
     "extra": {
         "think": {
             "config": {
-                "template": "config/jump.php"
+                "jump": "src/config/jump.php"
             }
         }
     }
