@@ -1,0 +1,27 @@
+{
+    "name": "qeq66/think-jump",
+    "type": "think-extend",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "qeq66",
+            "email": "qeq666@gmail.com"
+        }
+    ],
+    "require": {
+    	"php": ">=7.1.0",
+        "topthink/framework": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "qeq66\\think\\": "src/"
+        }
+    },
+    "extra": {
+        "think": {
+            "config": {
+                "template": "config/jump.php"
+            }
+        }
+    }
+}
