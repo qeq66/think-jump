@@ -19,7 +19,7 @@ use app\BaseController;
 
 class Index extends BaseController
 {
-  use \qeq66\think\Jump;
+  	use \qeq66\think\Jump;
     public function index()
     {
       return $this->error('错误');

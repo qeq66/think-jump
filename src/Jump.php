@@ -39,7 +39,7 @@ trait Jump
     {
         if (is_null($url) && isset($_SERVER["HTTP_REFERER"])) {
             $url = $_SERVER["HTTP_REFERER"];
-        } elseif ('' !== $url) {
+        } elseif ('' != $url) {
             $url = (strpos($url, '://') || 0 === strpos($url, '/')) ? $url : $this->app['route']->buildUrl($url)->build();
         }
 
@@ -78,7 +78,7 @@ trait Jump
         $type = $this->getResponseType();
         if (is_null($url)) {
             $url = $this->app['request']->isAjax() ? '' : 'javascript:history.back(-1);';
-        } elseif ('' !== $url) {
+        } elseif ('' != $url) {
             $url = (strpos($url, '://') || 0 === strpos($url, '/')) ? $url : $this->app['route']->buildUrl($url)->build();
         }
 
@@ -110,7 +110,7 @@ trait Jump
      * @param  array     $header 发送的Header信息
      * @return void
      */
-    protected function result($data, $code = 0, $msg = '', $type = '', array $header = [])
+    protected function result($data, $code = 0, $msg = '', $type = 'json', array $header = [])
     {
         $result = [
             'code' => $code,
@@ -119,7 +119,6 @@ trait Jump
             'data' => $data,
         ];
 
-        $type     = $type ?: $this->getResponseType();
         $response = Response::create($result, $type)->header($header);
 
         throw new HttpResponseException($response);
@@ -129,19 +128,14 @@ trait Jump
      * URL重定向
      * @access protected
      * @param  string         $url 跳转的URL表达式
-     * @param  array|integer  $params 其它URL参数
      * @param  integer        $code http code
      * @param  array          $with 隐式传参
      * @return void
      */
-    protected function redirect($url, $params = [], $code = 302, $with = [])
+    protected function redirect($url, $code = 302)
     {
-        if (is_integer($params)) {
-            $code   = $params;
-            $params = [];
-        }
 
-        $response = Response::create($url, 'redirect', $code)->params($params);
+        $response = Response::create($url, 'redirect', $code);
 
         throw new HttpResponseException($response);
     }
